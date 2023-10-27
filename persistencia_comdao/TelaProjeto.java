@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package persistencia_comdao;
+package persistencia_semdao;
 
+import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -177,23 +178,28 @@ public class TelaProjeto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BotNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotNextActionPerformed
+    private void BotNextActionPerformed(ActionEvent evt) {//GEN-FIRST:event_BotNextActionPerformed
         ProdutoDao pdao = new ProdutoDao();
         Produto p = new Produto();
 
         switch (BoxOption.getSelectedIndex()) {
-            case 0 -> JOptionPane.showMessageDialog(null, "Selecione uma opção acima");
-            case 1 -> {
+            case 0:
+                JOptionPane.showMessageDialog(null, "Selecione uma opção acima");
+                break;
+            case 1:
+
                 p.setDescricao(BoxDesc.getText());
                 p.setPreco(Double.parseDouble(BoxPreco.getText()));
                 try {
                     pdao.cadastrar(p);
                     JOptionPane.showMessageDialog(null,"Produto Cadastrado com sucesso !");
+
                 } catch (ClassNotFoundException | SQLException ex) {
                     JOptionPane.showMessageDialog(null,"Deu errado irmao.. "  + ex.getMessage());
+                    System.out.println("Chegou aqui.");
                 }
-            }
-            case 2 -> {
+                break;
+            case 2:
                 p.setDescricao(BoxDesc.getText());
                 p.setPreco(Double.parseDouble(BoxPreco.getText()));
                 p.setId((int) Double.parseDouble(boxId.getText()));
@@ -203,8 +209,8 @@ public class TelaProjeto extends javax.swing.JFrame {
                 } catch(ClassNotFoundException | SQLException ex){
                     JOptionPane.showMessageDialog(null,"Erro Irmao.. " + ex.getMessage());
                 }
-            }
-            case 3 -> {
+                break;
+            case 3:
                 p.setId((int) Double.parseDouble(boxId.getText()));
                 try {
                     pdao.delete(p);
@@ -212,18 +218,20 @@ public class TelaProjeto extends javax.swing.JFrame {
                 } catch (ClassNotFoundException | SQLException ex){
                     JOptionPane.showMessageDialog(null,"Erro Irmao... "  + ex.getMessage());
                 }
-            }
-            case 4 -> {
+                break;
+            case 4:
+                // Define o ID do Objeto produto (Poderia ser um STRING que seria mt superior
                 p.setId((int) Double.parseDouble(boxId.getText()));
                 
                 try {
-                    pdao.consultarById(p);
-                    JOptionPane.showMessageDialog(null, "Descricao: " + p.getDescricao());
+                    // Cria um objeto produto e salva os dados retornados do método pdao.consultarById()
+                    Produto result = pdao.consultarById(p);
+                    JOptionPane.showMessageDialog(null, "Descricao: " + result.getDescricao());
                 } catch (ClassNotFoundException | SQLException ex){
                     JOptionPane.showMessageDialog(null,"Erro Irmao... "  + ex.getMessage());
                 }
-            }
-            default -> {
+                break;
+            default:
                 try {
                     List<Produto> listaproduto = pdao.consultarTodos();
                     for (Produto p1 : listaproduto) {
@@ -235,7 +243,7 @@ public class TelaProjeto extends javax.swing.JFrame {
                 } catch (ClassNotFoundException ex) {
                     Logger.getLogger(TelaProjeto.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
+                break;
         }
         
         
@@ -256,7 +264,7 @@ public class TelaProjeto extends javax.swing.JFrame {
 
     private void BoxOptionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_BoxOptionItemStateChanged
         switch (BoxOption.getSelectedIndex()) {
-            case 0 -> {
+            case 0: {
                 boxId.setVisible(false);
                 BoxDesc.setVisible(false);
                 BoxPreco.setVisible(false);
@@ -265,7 +273,7 @@ public class TelaProjeto extends javax.swing.JFrame {
                 txtDesc.setVisible(false);
                 txtPreco.setVisible(false);
             }
-            case 1 -> {
+            case 1: {
                 txtId.setVisible(false);
                 txtDesc.setVisible(true);
                 txtPreco.setVisible(true);
@@ -274,7 +282,7 @@ public class TelaProjeto extends javax.swing.JFrame {
                 BoxDesc.setVisible(true);
                 BoxPreco.setVisible(true);
             }
-            case 2 -> {
+            case 2: {
                 txtId.setVisible(true);
                 txtDesc.setVisible(true);
                 txtPreco.setVisible(true);
@@ -283,7 +291,7 @@ public class TelaProjeto extends javax.swing.JFrame {
                 BoxDesc.setVisible(true);
                 BoxPreco.setVisible(true);
             }
-            case 3 -> {
+            case 3: {
                 txtDesc.setVisible(false);
                 txtPreco.setVisible(false);
                 txtId.setVisible(true);
@@ -293,7 +301,7 @@ public class TelaProjeto extends javax.swing.JFrame {
                 BoxPreco.setVisible(false);
 
             }
-            case 4 -> {
+            case 4: {
                 boxId.setVisible(true);
                 BoxDesc.setVisible(false);
                 BoxPreco.setVisible(false);
@@ -302,7 +310,7 @@ public class TelaProjeto extends javax.swing.JFrame {
                 txtDesc.setVisible(false);
                 txtPreco.setVisible(false);
             }
-            default -> {
+            default: {
                 boxId.setVisible(false);
                 BoxDesc.setVisible(false);
                 BoxPreco.setVisible(false);

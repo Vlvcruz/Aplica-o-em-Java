@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package persistencia_comdao;
+package persistencia_semdao;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,7 +31,7 @@ public class Persistencia_SemDAO {
         int decisao = scan.nextInt();
 
         switch (decisao) {
-            case 1 -> {
+            case 1: {
 
                 System.out.println("Digite a descriao do produto...");
                 clearBuffer(scan);
@@ -45,7 +45,7 @@ public class Persistencia_SemDAO {
                     System.out.println("ERRO: " + ex.getMessage());
                 }
             }
-            case 2 -> {
+            case 2: {
 
                 System.out.println("Digite o Id do produto que deseja ser alterado...");
                 clearBuffer(scan);
@@ -62,7 +62,7 @@ public class Persistencia_SemDAO {
                     System.out.println("ERRO: " + ex.getMessage());
                 }
             }
-            case 3 -> {
+            case 3: {
 
                 System.out.println("Digite o Id do produto que sera excluido...");
                 clearBuffer(scan);
@@ -74,7 +74,7 @@ public class Persistencia_SemDAO {
                     System.out.println("ERRO: " + ex.getMessage());
                 }
             }
-            case 4 -> {
+            case 4: {
 
                 System.out.print("Digite ID: ");
                 p.setId(scan.nextInt());
@@ -91,7 +91,7 @@ public class Persistencia_SemDAO {
                     System.out.println("Erro: " + ex.getMessage());
                 }
             }
-            default -> {
+            default: {
                 try {
                     List<Produto> listaproduto = pdao.consultarTodos();
 
