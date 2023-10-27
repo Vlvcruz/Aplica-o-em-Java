@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package persistencia_comdao;
+package persistencia_semdao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -42,14 +42,17 @@ public class ProdutoDao {
         Connection con = Conection.getConexao();
         PreparedStatement comando = con.prepareStatement("select * from produtos where id = ?");
         comando.setInt(1, prod.getId());
+        // Armazena resultados da query
         ResultSet rs = comando.executeQuery();
+        // Cria objeto produto
         Produto p = new Produto();
+        //Atribui os valores no objeto produto
         if (rs.next()) {
             p.setId(rs.getInt("id"));
             p.setDescricao(rs.getString("descricao"));
             p.setPreco(rs.getDouble("preco"));
         }
-        con.close();
+        // Devolve o objeto Produto
         return p;
     }
     /* QUERY PARA CONSULTAR 1 ID - FIM */
